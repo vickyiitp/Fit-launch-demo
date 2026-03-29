@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Clock, User } from 'lucide-react';
+import { Clock, User, CheckCircle } from 'lucide-react';
 import Modal from './Modal';
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -29,6 +29,19 @@ const SCHEDULE_DATA = {
 export default function Schedule() {
   const [activeDay, setActiveDay] = useState('Mon');
   const [bookingClass, setBookingClass] = useState<any>(null);
+  const [bookingStatus, setBookingStatus] = useState<'idle' | 'processing' | 'success'>('idle');
+
+  const handleBook = (e: React.FormEvent) => {
+    e.preventDefault();
+    setBookingStatus('processing');
+    setTimeout(() => {
+      setBookingStatus('success');
+      setTimeout(() => {
+        setBookingClass(null);
+        setTimeout(() => setBookingStatus('idle'), 300);
+      }, 2000);
+    }, 1500);
+  };
 
   return (
     <section id="schedule" className="py-24 px-6 max-w-7xl mx-auto">
@@ -96,26 +109,48 @@ export default function Schedule() {
         </AnimatePresence>
       </div>
 
-      <Modal isOpen={!!bookingClass} onClose={() => setBookingClass(null)} title="Book Class">
+      <Modal isOpen={!!bookingClass} onClose={() => { setBookingClass(null); setBookingStatus('idle'); }} title="Book Class">
         {bookingClass && (
-          <div className="font-sans">
-            <div className="mb-6 p-4 bg-dark border border-white/5 rounded">
-              <h4 className="font-display text-xl uppercase text-white mb-2">{bookingClass.name}</h4>
-              <div className="text-gray-400 text-sm flex flex-col gap-1">
-                <div><span className="text-neon">Time:</span> {bookingClass.time} ({activeDay})</div>
-                <div><span className="text-neon">Trainer:</span> {bookingClass.trainer}</div>
-                <div><span className="text-neon">Type:</span> {bookingClass.type}</div>
+          <div className="font-sans text-white">
+            {bookingStatus === 'success' ? (
+              <div className="py-8 flex flex-col items-center justify-center space-y-4 text-center">
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5 }}>
+                  <CheckCircle size={64} className="text-neon" />
+                </motion.div>
+                <div className="font-display uppercase tracking-wider text-2xl pt-2">Class Booked!</div>
+                <div className="text-gray-400">
+                  You are confirmed for {bookingClass.name}.<br/>
+                  We'll see you there!
+                </div>
               </div>
-            </div>
-            <form onSubmit={(e) => { e.preventDefault(); setBookingClass(null); }}>
-              <div className="mb-4">
-                <label className="block text-sm text-gray-400 mb-1">Member ID / Email</label>
-                <input type="text" required className="w-full bg-dark border border-white/10 px-4 py-2 text-white focus:border-neon outline-none transition-colors" placeholder="Enter your details" />
+            ) : bookingStatus === 'processing' ? (
+              <div className="py-12 flex flex-col items-center justify-center space-y-4">
+                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }}>
+                  <Clock size={40} className="text-neon" />
+                </motion.div>
+                <div className="font-display uppercase tracking-wider text-xl">Confirming Spot...</div>
               </div>
-              <button type="submit" className="w-full py-3 bg-neon text-darker font-display uppercase tracking-wider hover:bg-white transition-colors skew-x-[-10deg]">
-                <div className="skew-x-[10deg]">Confirm Booking</div>
-              </button>
-            </form>
+            ) : (
+              <>
+                <div className="mb-6 p-4 bg-dark border border-white/5 rounded">
+                  <h4 className="font-display text-xl uppercase text-white mb-2">{bookingClass.name}</h4>
+                  <div className="text-gray-400 text-sm flex flex-col gap-1">
+                    <div><span className="text-neon">Time:</span> {bookingClass.time} ({activeDay})</div>
+                    <div><span className="text-neon">Trainer:</span> {bookingClass.trainer}</div>
+                    <div><span className="text-neon">Type:</span> {bookingClass.type}</div>
+                  </div>
+                </div>
+                <form onSubmit={handleBook}>
+                  <div className="mb-4">
+                    <label className="block text-sm text-gray-400 mb-1">Member ID / Email</label>
+                    <input type="text" required className="w-full bg-dark border border-white/10 px-4 py-2 text-white focus:border-neon outline-none transition-colors" placeholder="Enter your details" />
+                  </div>
+                  <button type="submit" className="w-full py-3 bg-neon text-darker font-display uppercase tracking-wider hover:bg-white transition-colors skew-x-[-10deg]">
+                    <div className="skew-x-[10deg]">Confirm Booking</div>
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         )}
       </Modal>
