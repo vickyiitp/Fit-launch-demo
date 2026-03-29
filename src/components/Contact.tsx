@@ -17,7 +17,7 @@ export default function Contact() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Will be replaced by user
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
           subject: "New Contact Message - FitLaunch Demo",
           Name: formData.name,
           Email: formData.email,
