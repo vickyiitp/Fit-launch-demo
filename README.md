@@ -1,29 +1,28 @@
-# Fit-launch-demo
+<div align="center">
 
-This is a **Premium Fitness Landing Page** demo designed for showcasing high-end web development capabilities to clients. 
+# 💪 FitLaunch — High-Conversion Gym & Fitness Studio Platform
+### Modern Membership Engine, Trainer Scheduling & Interactive Class Showcase
 
-## 🚀 Project Overview
-This project serves as a state-of-the-art landing page for a fitness brand, featuring modern design aesthetics, smooth animations, and a responsive layout. It is built to demonstrate performance, usability, and visual excellence.
+[![Vite](https://img.shields.io/badge/Vite-Fast%20Bundler-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![FitnessTech](https://img.shields.io/badge/Domain-FitnessTech-ef4444?style=for-the-badge)](https://devillabs.dev)
+[![Architect](https://img.shields.io/badge/Architect-Vicky%20Kumar-8b5cf6?style=for-the-badge&logo=github)](https://github.com/vickyiitp)
 
-## 🛠️ Tech Stack
-- **Framework**: [React 19](https://react.dev/)
-- **Build Tool**: [Vite 6](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Animations**: [Motion (Framer Motion)](https://motion.dev/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **AI Integration**: [Google Generative AI SDK](https://www.npmjs.com/package/@google/genai)
-
-## ✨ Key Features
-- **Modern UI/UX**: Sleek, dark-themed design with high-quality typography (Anton & Inter).
-- **Responsive Design**: Fully optimized for desktop, tablet, and mobile viewing.
-- **Micro-Animations**: Engaging transitions and hover effects using Framer Motion.
-- **Premium Aesthetics**: Professional color palette and layout structure suitable for high-ticket clients.
-
-## 📦 What's Inside?
-- `index.html`: Optimized entry point.
-- `src/`: Comprehensive source code for components and logic.
-- `vite.config.ts`: Performance-tuned build configuration.
-- `.env.example`: Template for environment variables.
+</div>
 
 ---
-*Developed for client demonstration purposes.*
+
+## 🏋️ Features
+
+- 🗓️ **Interactive Class Timetable**: Live schedule for HIIT, Yoga, Boxing, and Strength Conditioning.
+- 💳 **Tiered Membership Calculator**: Interactive pricing toggles (Monthly vs. Annual savings).
+- 🏆 **Trainer Showcase**: Video intros and specialty tags for personal fitness coaches.
+
+```bash
+git clone https://github.com/vickyiitp/Fit-launch-demo.git
+cd Fit-launch-demo
+npm install
+npm run dev
+```
+
+Engineered by **Vicky Kumar** @ [Devil Labs](https://devillabs.dev)
